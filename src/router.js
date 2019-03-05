@@ -1,0 +1,48 @@
+import Vue from 'vue';
+import VueRouter from 'vue-router';
+import Home from './components/Home';
+import Topics from './components/Topics';
+import Activities from './components/Activities';
+import PostList from './components/PostList';
+import Post from './components/Post';
+Vue.use(VueRouter);
+
+const router = new VueRouter({
+  routes: [
+    {
+      path: '/',
+      component: Home,
+      children: [
+        // 子路由内的以/开头代表的是根路径，所以子路由不需要以/开头
+        {
+          //  /,/welcome/:type
+          path: '',
+          component: PostList
+        },
+        {
+          path: 'welcome/:type',
+          component: PostList
+        }
+      ]
+    },
+    {
+      path: '/activities',
+      component: Activities
+    },
+    {
+      path: '/topics',
+      component: Topics
+    },
+    {
+      path: '/post/:id',
+      component: Post
+    },
+    {
+      path: '/search',
+      component: PostList
+    }
+  ],
+  mode: 'history'
+});
+
+export default router;
